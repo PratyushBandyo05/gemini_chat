@@ -1,1 +1,1 @@
-# chatGemini
+# gemini_chat
