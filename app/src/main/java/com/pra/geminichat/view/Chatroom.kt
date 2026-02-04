@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -30,6 +29,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pra.geminichat.model.ChatModel
+import com.pra.geminichat.ui.theme.Purple80
+import com.pra.geminichat.ui.theme.PurpleGrey80
 import com.pra.geminichat.utils.ModelRoles
 import com.pra.geminichat.viewmodel.ChatroomViewModel
 
@@ -48,8 +49,7 @@ fun ChatRoom(modifier: Modifier = Modifier, viewModel: ChatroomViewModel) {
 @Composable
 fun ChatList(modifier: Modifier = Modifier, chatList: List<ChatModel>) {
     LazyColumn(
-        modifier = modifier,
-        reverseLayout = true
+        modifier = modifier, reverseLayout = true
     ) {
         items(chatList.reversed()) {
             ChatRow(chat = it)
@@ -76,14 +76,15 @@ fun ChatRow(chat: ChatModel) {
                         top = 8.dp,
                         bottom = 8.dp
                     )
-                    .background(color = if(isUser) Color.Cyan else Color.Magenta,
-                        shape = RoundedCornerShape(8.dp))
+                    .background(
+                        color = if (isUser) Purple80 else PurpleGrey80,
+                        shape = RoundedCornerShape(8.dp)
+                    )
                     .padding(8.dp)
 
             ) {
                 Text(
-                    text = chat.message,
-                    fontWeight = FontWeight.W500
+                    text = chat.message, fontWeight = FontWeight.W500
                 )
             }
         }
@@ -115,13 +116,10 @@ fun MessageInput(onMessageSend: (String) -> Unit) {
     }
 
     Row(
-        modifier = Modifier.padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically
     ) {
         OutlinedTextField(
-            modifier = Modifier.weight(1f),
-            value = message,
-            onValueChange = {
+            modifier = Modifier.weight(1f), value = message, onValueChange = {
                 message = it
             })
 
@@ -130,8 +128,7 @@ fun MessageInput(onMessageSend: (String) -> Unit) {
             message = ""
         }) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.Send,
-                contentDescription = "Send"
+                imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = "Send"
             )
         }
     }
