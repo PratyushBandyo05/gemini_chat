@@ -1,2 +1,2 @@
 # gemini_chat
-Place your 'google-services.json' in app/
+Place your 'google-services.json' inside app/
